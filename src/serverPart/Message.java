@@ -14,6 +14,16 @@ public class Message {
 
     private int idReceiver;
 
+    public int getIdSender() {
+        return idSender;
+    }
+
+    public void setIdSender(int idSender) {
+        this.idSender = idSender;
+    }
+
+    private int idSender;
+
     public Message(Object data, int idReceiver) {
         this.data = data;
         this.idReceiver = idReceiver;
