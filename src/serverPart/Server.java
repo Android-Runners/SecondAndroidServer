@@ -10,12 +10,11 @@ import java.util.Scanner;
 
 public class Server implements Runnable {
 
-    private final int port = 55000;
+    private final int port = 53000;
 
     private ServerSocket serverSocket;
     private ObjectInputStream input;
     private ObjectOutputStream output;
-    private Scanner scanner;
     private int clientsCount = 0;
 
     private LinkedList<Client> clients = new LinkedList<>();
@@ -24,7 +23,11 @@ public class Server implements Runnable {
     public void run() {
         System.out.println("Server was started. Port: " + port);
 
-        initialization();
+        try {
+            serverSocket = new ServerSocket(port);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         while(true) {
             try {
@@ -35,22 +38,6 @@ public class Server implements Runnable {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            finally {
-                try {
-                    serverSocket.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
-
-    private void initialization() {
-            try {
-            scanner = new Scanner(System.in);
-            serverSocket = new ServerSocket(port);
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 
@@ -61,7 +48,7 @@ public class Server implements Runnable {
         for(Client client : clients) {
             try {
                 Socket socket = client.getSocket();
-                ObjectOutputStream output = (ObjectOutputStream) socket.getOutputStream();
+                ObjectOutputStream output = new ObjectOutputStream(socket.getOutputStream());
                 output.flush();
                 output.writeObject(message);
             } catch (IOException e) {
