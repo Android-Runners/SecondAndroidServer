@@ -28,8 +28,8 @@ public class Client implements Runnable {
     @Override
     public void run() {
         try {
-            output = (ObjectOutputStream) socket.getOutputStream();
-            input = (ObjectInputStream) socket.getInputStream();
+            output = new ObjectOutputStream(socket.getOutputStream());
+            input = new ObjectInputStream(socket.getInputStream());
 
             System.out.println("Client #" + number + " was connected");
 
