@@ -4,17 +4,19 @@ import java.io.Serializable;
 
 public class Message implements Serializable {
 
+    private Object data;
+
+    private int idReceiver;
+
+    private int idSender;
+
     public Object getData() {
         return data;
     }
 
-    private Object data;
-
     public int getIdReceiver() {
         return idReceiver;
     }
-
-    private int idReceiver;
 
     public int getIdSender() {
         return idSender;
@@ -24,12 +26,11 @@ public class Message implements Serializable {
         this.idSender = idSender;
     }
 
-    private int idSender;
-
     public Message(Object data, int idReceiver) {
         this.data = data;
         this.idReceiver = idReceiver;
     }
+    public Message(){}
 
     @Override
     public String toString() {
