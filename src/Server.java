@@ -60,7 +60,7 @@ public class Server implements Runnable {
                 return;
             }
 
-            ObjectOutputStream output = (ObjectOutputStream) clients.get(fromClientNumber).getSocket().getOutputStream();
+            ObjectOutputStream output = clients.get(fromClientNumber).getOutput();
             output.flush();
             output.writeObject(message);
             output.flush();
