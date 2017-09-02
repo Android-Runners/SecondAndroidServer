@@ -61,6 +61,7 @@ public class Server implements Runnable {
 
             if (message.getIdReceiver() == -1) {
                 sendToAllUsers(message, fromClientNumber);
+                return;
             }
 
             ObjectOutputStream output = (ObjectOutputStream) clients.get(fromClientNumber).getSocket().getOutputStream();
