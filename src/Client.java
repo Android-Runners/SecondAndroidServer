@@ -6,10 +6,6 @@ public class Client implements Runnable {
     private Server server;
     private Socket socket;
 
-    public Socket getSocket() {
-        return socket;
-    }
-
     private int number;
 
     public ObjectOutputStream getOutput() {

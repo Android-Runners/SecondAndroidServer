@@ -31,6 +31,6 @@ public class Message implements Serializable {
 
     @Override
     public String toString() {
-        return "Data: " + ((Integer) data);
+        return "Data: " + data;
     }
 }
