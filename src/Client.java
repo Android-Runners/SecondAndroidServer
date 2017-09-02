@@ -36,12 +36,7 @@ public class Client implements Runnable {
             while(true) {
                 try {
                     Message message = (Message) input.readObject();
-
-                    if(message.getData() instanceof PrintStreamDub) {
-                        ((PrintStreamDub) message.getData()).write(55);
-                    }
-
-//                    server.sendMessage(message, number);
+                    server.sendMessage(message, number);
                 } catch (ClassNotFoundException e) {
                     e.printStackTrace();
                 }
