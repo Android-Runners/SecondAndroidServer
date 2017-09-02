@@ -13,8 +13,6 @@ public class Server implements Runnable {
     private final int port = 53000;
 
     private ServerSocket serverSocket;
-    private ObjectInputStream input;
-    private ObjectOutputStream output;
     private int clientsCount = 0;
 
     private LinkedList<Client> clients = new LinkedList<>();
