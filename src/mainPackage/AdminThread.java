@@ -21,7 +21,7 @@ public class AdminThread implements Runnable {
 
             Message message = new Message(s, -1);
 
-            server.sendToAllUsers(message);
+            server.sendToAllUsers(message, -1);
 
             System.out.println("Done");
         }
