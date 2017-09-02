@@ -47,6 +47,8 @@ public class Server implements Runnable {
                 ObjectOutputStream output = new ObjectOutputStream(socket.getOutputStream());
                 output.flush();
                 output.writeObject(message);
+                output.flush();
+                output.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
