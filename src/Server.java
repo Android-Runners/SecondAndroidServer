@@ -41,12 +41,10 @@ public class Server implements Runnable {
 
         for(Client client : clients) {
             try {
-                Socket socket = client.getSocket();
-                ObjectOutputStream output = new ObjectOutputStream(socket.getOutputStream());
+                ObjectOutputStream output = client.getOutput();
                 output.flush();
                 output.writeObject(message);
                 output.flush();
-                output.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }

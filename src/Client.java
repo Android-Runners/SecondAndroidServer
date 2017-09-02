@@ -14,6 +14,10 @@ public class Client implements Runnable {
 
     private int number;
 
+    public ObjectOutputStream getOutput() {
+        return output;
+    }
+
     private ObjectOutputStream output;
     private ObjectInputStream input;
 
