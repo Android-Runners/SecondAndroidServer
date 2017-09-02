@@ -37,9 +37,9 @@ public class Server implements Runnable {
         }
     }
 
-    public void sendToAllUsers(Message message) {
+    public void sendToAllUsers(Message message, int fromClientNumber) {
 
-        message.setIdSender(-1);
+        message.setIdSender(fromClientNumber);
 
         for(Client client : clients) {
             try {
@@ -58,6 +58,10 @@ public class Server implements Runnable {
     void sendMessage(Message message, int fromClientNumber) {
         try {
             message.setIdSender(fromClientNumber);
+
+            if (message.getIdReceiver() == -1) {
+                sendToAllUsers(message, fromClientNumber);
+            }
 
             ObjectOutputStream output = (ObjectOutputStream) clients.get(fromClientNumber).getSocket().getOutputStream();
             output.flush();
