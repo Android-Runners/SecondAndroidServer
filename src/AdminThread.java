@@ -1,8 +1,3 @@
-package mainPackage;
-
-import serverPart.Message;
-import serverPart.Server;
-
 import java.util.Scanner;
 
 public class AdminThread implements Runnable {
