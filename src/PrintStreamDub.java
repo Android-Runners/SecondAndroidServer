@@ -1,9 +1,11 @@
-import java.io.FilterOutputStream;
+import java.io.IOException;
 import java.io.OutputStream;
 import java.io.Serializable;
 
-public class PrintStreamDub extends FilterOutputStream implements Serializable {
-    public PrintStreamDub(OutputStream out) {
-        super(out);
+public class PrintStreamDub extends OutputStream implements Serializable {
+
+    @Override
+    public void write(int b) throws IOException {
+
     }
 }
