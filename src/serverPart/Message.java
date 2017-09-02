@@ -30,4 +30,9 @@ public class Message implements Serializable {
         this.data = data;
         this.idReceiver = idReceiver;
     }
+
+    @Override
+    public String toString() {
+        return (String) data;
+    }
 }
