@@ -1,16 +1,14 @@
 package serverPart;
 
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.LinkedList;
-import java.util.Scanner;
 
 public class Server implements Runnable {
 
-    private final int port = 53000;
+    private final int PORT = 53000;
 
     private ServerSocket serverSocket;
     private int clientsCount = 0;
@@ -19,10 +17,10 @@ public class Server implements Runnable {
 
     @Override
     public void run() {
-        System.out.println("Server was started. Port: " + port);
+        System.out.println("Server was started. Port: " + PORT);
 
         try {
-            serverSocket = new ServerSocket(port);
+            serverSocket = new ServerSocket(PORT);
         } catch (IOException e) {
             e.printStackTrace();
         }
