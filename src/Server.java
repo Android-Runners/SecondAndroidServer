@@ -1,5 +1,3 @@
-package serverPart;
-
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
@@ -37,7 +35,7 @@ public class Server implements Runnable {
         }
     }
 
-    public void sendToAllUsers(serverPart.Message message, int fromClientNumber) {
+    public void sendToAllUsers(Message message, int fromClientNumber) {
 
         message.setIdSender(fromClientNumber);
 
@@ -55,7 +53,7 @@ public class Server implements Runnable {
         }
     }
 
-    void sendMessage(serverPart.Message message, int fromClientNumber) {
+    void sendMessage(Message message, int fromClientNumber) {
         try {
             message.setIdSender(fromClientNumber);
 

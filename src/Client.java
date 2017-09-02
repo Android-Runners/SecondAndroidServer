@@ -1,5 +1,3 @@
-package serverPart;
-
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -35,7 +33,7 @@ public class Client implements Runnable {
 
             while(true) {
                 try {
-                    serverPart.Message message = (serverPart.Message) input.readObject();
+                    Message message = (Message) input.readObject();
                     server.sendMessage(message, number);
                 } catch (ClassNotFoundException e) {
                     e.printStackTrace();
