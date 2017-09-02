@@ -31,6 +31,6 @@ public class Message implements Serializable {
 
     @Override
     public String toString() {
-        return "Data: " + data;
+        return "User № " + idSender + " has sent: " + data;
     }
 }
