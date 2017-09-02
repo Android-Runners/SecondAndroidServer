@@ -1,6 +1,4 @@
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.net.Socket;
 
 public class Client implements Runnable {
@@ -38,7 +36,8 @@ public class Client implements Runnable {
             while(true) {
                 try {
                     Message message = (Message) input.readObject();
-                    server.sendMessage(message, number);
+                    
+//                    server.sendMessage(message, number);
                 } catch (ClassNotFoundException e) {
                     e.printStackTrace();
                 }
