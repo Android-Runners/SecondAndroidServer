@@ -37,7 +37,7 @@ public class Server implements Runnable {
         }
     }
 
-    public void sendToAllUsers(Message message, int fromClientNumber) {
+    public void sendToAllUsers(serverPart.Message message, int fromClientNumber) {
 
         message.setIdSender(fromClientNumber);
 
@@ -55,7 +55,7 @@ public class Server implements Runnable {
         }
     }
 
-    void sendMessage(Message message, int fromClientNumber) {
+    void sendMessage(serverPart.Message message, int fromClientNumber) {
         try {
             message.setIdSender(fromClientNumber);
 

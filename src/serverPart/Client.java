@@ -35,7 +35,7 @@ public class Client implements Runnable {
 
             while(true) {
                 try {
-                    Message message = (Message) input.readObject();
+                    serverPart.Message message = (serverPart.Message) input.readObject();
                     server.sendMessage(message, number);
                 } catch (ClassNotFoundException e) {
                     e.printStackTrace();
