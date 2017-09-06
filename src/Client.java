@@ -1,3 +1,5 @@
+import com.savelyevlad.secondclientandroid.ClientServerCommonClasses.Message;
+
 import java.io.*;
 import java.net.Socket;
 
