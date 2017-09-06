@@ -1,3 +1,5 @@
+package com.savelyevlad.secondclientandroid.ClientServerCommonClasses;
+
 import java.io.Serializable;
 
 public class Message implements Serializable {

@@ -1,3 +1,5 @@
+import com.savelyevlad.secondclientandroid.ClientServerCommonClasses.Message;
+
 import java.util.Scanner;
 
 public class AdminThread implements Runnable {
