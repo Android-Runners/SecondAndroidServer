@@ -1,4 +1,4 @@
-import com.savelyevlad.secondclientandroid.ClientServerCommonClasses.Message;
+import com.example.androidclient.Message;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -8,7 +8,7 @@ import java.util.LinkedList;
 
 public class Server implements Runnable {
 
-    private final int PORT = 53000;
+    private final int PORT = 5165;
 
     private ServerSocket serverSocket;
     private int clientsCount = 0;

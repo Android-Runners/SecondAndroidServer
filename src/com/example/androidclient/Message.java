@@ -1,4 +1,4 @@
-package com.savelyevlad.secondclientandroid.ClientServerCommonClasses;
+package com.example.androidclient;
 
 import java.io.Serializable;
 

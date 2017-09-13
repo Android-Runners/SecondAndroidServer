@@ -1,4 +1,4 @@
-import com.savelyevlad.secondclientandroid.ClientServerCommonClasses.Message;
+import com.example.androidclient.Message;
 
 import java.util.Scanner;
 

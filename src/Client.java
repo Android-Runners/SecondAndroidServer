@@ -1,4 +1,4 @@
-import com.savelyevlad.secondclientandroid.ClientServerCommonClasses.Message;
+import com.example.androidclient.Message;
 
 import java.io.*;
 import java.net.Socket;
@@ -34,6 +34,7 @@ public class Client implements Runnable {
             while(true) {
                 try {
                     Message message = (Message) input.readObject();
+                    System.out.println(message.getData().toString());
                     server.sendMessage(message, number);
                 } catch (ClassNotFoundException e) {
                     e.printStackTrace();
