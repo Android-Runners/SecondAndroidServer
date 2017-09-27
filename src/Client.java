@@ -32,14 +32,15 @@ public class Client implements Runnable {
 
             System.out.println("Client #" + number + " was connected");
 
-            while(true) {
+//            while(true) {
                 try {
                     BitmapReaderWriter bitmapReaderWriter = new BitmapReaderWriter();
                     bitmapReaderWriter.readObject(input);
+                    System.out.println("Received");
                     bitmapReaderWriter.writeObject(output);
-                } catch (ClassNotFoundException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
-                }
+//                }
             }
         } catch (IOException e) {
             e.printStackTrace();
