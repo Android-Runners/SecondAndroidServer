@@ -43,6 +43,9 @@ public class Server implements Runnable {
 
         for(Client client : clients) {
             try {
+                if(fromClientNumber != -1 && client == clients.get(fromClientNumber)) {
+                    continue;
+                }
                 ObjectOutputStream output = client.getOutput();
                 output.flush();
                 output.writeObject(message);
@@ -55,6 +58,9 @@ public class Server implements Runnable {
 
     void sendMessage(Message message, int fromClientNumber) {
         try {
+
+            System.out.println("Receiver " + message.getIdReceiver());
+
             message.setIdSender(fromClientNumber);
 
             if (message.getIdReceiver() == -1) {
