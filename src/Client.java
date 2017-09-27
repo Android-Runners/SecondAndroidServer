@@ -1,3 +1,4 @@
+import com.example.androidclient.BitmapReaderWriter;
 import com.example.androidclient.Message;
 
 import java.io.*;
@@ -33,9 +34,9 @@ public class Client implements Runnable {
 
             while(true) {
                 try {
-                    Message message = (Message) input.readObject();
-                    System.out.println(message.getData().toString());
-                    server.sendMessage(message, number);
+                    BitmapReaderWriter bitmapReaderWriter = new BitmapReaderWriter();
+                    bitmapReaderWriter.readObject(input);
+                    bitmapReaderWriter.writeObject(output);
                 } catch (ClassNotFoundException e) {
                     e.printStackTrace();
                 }
