@@ -55,8 +55,8 @@ public class BitmapReaderWriter {
 
     public void writeObject(java.io.ObjectOutputStream out) throws IOException {
         out.writeObject(byteArray.length);
-        for (int i = 0; i < byteArray.length; ++i) {
-            out.writeObject(byteArray[i]);
+        for (byte aByteArray : byteArray) {
+            out.writeObject(aByteArray);
         }
 //        out.writeObject(byteArray);
     }
