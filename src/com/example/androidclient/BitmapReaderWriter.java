@@ -42,10 +42,10 @@ public class BitmapReaderWriter {
 
         System.out.println("~~~~~~~~~~~~~~~~~");
 
-        String s = "";
+        StringBuilder s = new StringBuilder();
 
         for(Byte b : byteArray) {
-            s += b;
+            s.append(b);
         }
 
         System.out.println(s);
