@@ -33,7 +33,7 @@ public class Server implements Runnable {
         while(true) {
             try {
                 Socket socket = serverSocket.accept();
-                System.out.println("36");
+               // System.out.println("36");
                 Client client = new Client(this, socket, clientsCount++);
                 clients.add(client);
                 new Thread(client).start();
