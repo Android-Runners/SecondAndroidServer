@@ -1,12 +1,16 @@
-import com.example.androidclient.BitmapReaderWriter;
-import com.example.androidclient.Message;
-
-import java.io.*;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 public class Client implements Runnable {
 
     private Server server;
+
+    public Socket getSocket() {
+        return socket;
+    }
+
     private Socket socket;
 
     private int number;
@@ -27,20 +31,21 @@ public class Client implements Runnable {
     @Override
     public void run() {
         try {
+            System.out.println("34");
             output = new ObjectOutputStream(socket.getOutputStream());
             input = new ObjectInputStream(socket.getInputStream());
 
             System.out.println("Client #" + number + " was connected");
 
-//            while(true) {
+           while(true) {
                 try {
-                    BitmapReaderWriter bitmapReaderWriter = new BitmapReaderWriter();
+                    BitmapReaderWriter bitmapReaderWriter = new BitmapReaderWriter(server);
                     bitmapReaderWriter.readObject(input);
                     System.out.println("Received");
-                    bitmapReaderWriter.writeObject(output);
+                    bitmapReaderWriter.writeObject();
                 } catch (Exception e) {
                     e.printStackTrace();
-//                }
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();
