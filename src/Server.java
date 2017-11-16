@@ -2,6 +2,7 @@ import com.example.androidclient.Message;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.LinkedList;
@@ -12,6 +13,10 @@ public class Server implements Runnable {
 
     private ServerSocket serverSocket;
     private int clientsCount = 0;
+
+    public LinkedList<Client> getClients() {
+        return clients;
+    }
 
     private LinkedList<Client> clients = new LinkedList<>();
 
@@ -28,6 +33,7 @@ public class Server implements Runnable {
         while(true) {
             try {
                 Socket socket = serverSocket.accept();
+                System.out.println("36");
                 Client client = new Client(this, socket, clientsCount++);
                 clients.add(client);
                 new Thread(client).start();
@@ -47,7 +53,6 @@ public class Server implements Runnable {
                     continue;
                 }
                 ObjectOutputStream output = client.getOutput();
-                output.flush();
                 output.writeObject(message);
                 output.flush();
             } catch (IOException e) {
