@@ -9,7 +9,7 @@ import java.util.LinkedList;
 
 public class Server implements Runnable {
 
-    private final int PORT = 60000;
+    private final int PORT = 50000;
 
     private ServerSocket serverSocket;
     private int clientsCount = 0;
