@@ -31,7 +31,7 @@ public class Client implements Runnable {
     @Override
     public void run() {
         try {
-            System.out.println("34");
+           // System.out.println("34");
             output = new ObjectOutputStream(socket.getOutputStream());
             input = new ObjectInputStream(socket.getInputStream());
 
@@ -39,7 +39,6 @@ public class Client implements Runnable {
             BitmapReaderWriter bitmapReaderWriter = new BitmapReaderWriter(server, number);
             bitmapReaderWriter.setObject(number);
             bitmapReaderWriter.setToWhom(number);
-            System.out.println((Integer)(bitmapReaderWriter.getObject()));
             bitmapReaderWriter.writeObject();
            while(true) {
                 try {
@@ -49,7 +48,7 @@ public class Client implements Runnable {
                     System.out.println("Client #" + number + " sends to " + bitmapReaderWriter.getToWhom() + " video: " + bitmapReaderWriter.getSize());
                     bitmapReaderWriter.writeObject();
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    // e.printStackTrace();
                 }
             }
         } catch (IOException e) {

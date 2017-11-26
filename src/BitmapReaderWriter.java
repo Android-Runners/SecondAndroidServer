@@ -71,15 +71,15 @@ public class BitmapReaderWriter {
 
     public void writeObject() throws IOException {
         ObjectOutputStream objectOutputStream;
-        try {
+      //  try {
             objectOutputStream = server.getClients().get(toWhom).getOutput();
             objectOutputStream.writeObject(object);
-        }catch(IndexOutOfBoundsException e){
+       /* }catch(IndexOutOfBoundsException e){
             String s = new String("Такого користувача не зареєстровано на сервері");
             object = s.getBytes();
             objectOutputStream = server.getClients().get(number).getOutput();
             objectOutputStream.writeObject(concat(new byte[]{-1}, (byte[])object));
             System.out.println(e.getMessage() + "!!");
-        }
+        }*/
     }
 }
