@@ -47,6 +47,7 @@ public class Client implements Runnable {
                     System.out.println("Received");
                     System.out.println("Client #" + number + " sends to " + bitmapReaderWriter.getToWhom() + " video: " + bitmapReaderWriter.getSize());
                     bitmapReaderWriter.writeObject();
+
                 } catch (Exception e) {
                     // e.printStackTrace();
                 }
