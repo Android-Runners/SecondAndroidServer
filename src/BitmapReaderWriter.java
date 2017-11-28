@@ -58,10 +58,11 @@ public class BitmapReaderWriter {
     public void readObject(java.io.ObjectInputStream in) throws IOException, ClassNotFoundException {
         object = in.readObject();
         size = ((byte[])object).length;
-        toWhom = Integer.valueOf(((byte[])object)[0]);
+        toWhom = (int) ((byte[]) object)[0];
         byte[] receiveData = remove((byte[])object, 0);
         object = receiveData;
     }
+
     private byte[] concat(byte[] a, byte[] b) {
         byte[] t = new byte[a.length + b.length];
         System.arraycopy(a, 0, t, 0, a.length);
@@ -72,8 +73,10 @@ public class BitmapReaderWriter {
     public void writeObject() throws IOException {
         ObjectOutputStream objectOutputStream;
       //  try {
-            objectOutputStream = server.getClients().get(toWhom).getOutput();
-            objectOutputStream.writeObject(object);
+        objectOutputStream = server.getClients().get(toWhom).getOutput();
+        objectOutputStream.flush();
+        objectOutputStream.writeObject(object);
+        objectOutputStream.flush();
        /* }catch(IndexOutOfBoundsException e){
             String s = new String("Такого користувача не зареєстровано на сервері");
             object = s.getBytes();

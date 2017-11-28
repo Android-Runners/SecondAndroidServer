@@ -9,7 +9,7 @@ import java.util.LinkedList;
 
 public class Server implements Runnable {
 
-    private final int PORT = 50000;
+    private final int PORT = 49002;
 
     private ServerSocket serverSocket;
     private int clientsCount = 0;
@@ -33,6 +33,7 @@ public class Server implements Runnable {
         while(true) {
             try {
                 Socket socket = serverSocket.accept();
+                socket.setTcpNoDelay(true);
                // System.out.println("36");
                 Client client = new Client(this, socket, clientsCount++);
                 clients.add(client);
