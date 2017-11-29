@@ -43,8 +43,6 @@ public class BitmapReaderWriter {
         this.number = number;
     }
 
-    public BitmapReaderWriter() {}
-
     private byte[] remove(byte[] bytes, int index) {
         if (index >= 0 && index < bytes.length) {
             byte[] copy = new byte[bytes.length-1];
@@ -59,8 +57,7 @@ public class BitmapReaderWriter {
         object = in.readObject();
         size = ((byte[])object).length;
         toWhom = (int) ((byte[]) object)[0];
-        byte[] receiveData = remove((byte[])object, 0);
-        object = receiveData;
+        object = remove((byte[])object, 0);
     }
 
     private byte[] concat(byte[] a, byte[] b) {
