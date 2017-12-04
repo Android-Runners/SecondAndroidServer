@@ -16,6 +16,12 @@ public class Server implements Runnable {
 
     private LinkedList<Client> clients = new LinkedList<>();
 
+    public LinkedList<Client> getClientsTrans() {
+        return clientsTrans;
+    }
+
+    private LinkedList<Client> clientsTrans = new LinkedList<>();
+
     @Override
     public void run() {
         System.out.println("Server was started. Port: " + PORT);
