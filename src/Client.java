@@ -1,13 +1,11 @@
+import java.io.EOFException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
+import java.util.*;
 
 public class Client implements Runnable {
-
     private Server server;
 
     public Socket getSocket() {
@@ -37,12 +35,17 @@ public class Client implements Runnable {
 
     private boolean isSharing = false;
 
+    int max = 0;
+
     public HashMap<Integer, Client> getClients() {
         return clients;
     }
 
     private HashMap<Integer, Client> clients = new HashMap<>();
 
+    private Integer host;
+
+    private boolean isWant = true;
     @Override
     public void run() {
         try {
@@ -57,48 +60,83 @@ public class Client implements Runnable {
             bitmapReaderWriter.writeObject();
             while(true) {
                 try {
-                    int type = (int) input.readObject();
+                    int type = -4;
+                    try {
+                        type = (int) input.readObject();
+                    }catch(EOFException eoef) {
+                        server.getClientsTrans().get(host).clients.remove(number);
+                        return;
+                    }
                     if(type == -1) {
+                        server.getClientsTrans().add(this);
                         isSharing = true;
                         while(isSharing) {
-                            Object object = input.readObject();
-                            System.out.println(((byte[])object).length);
+                            Object object = null;
+                            try {
+                                object = input.readObject();
+                            }catch(EOFException ioe){
+                                server.getClientsTrans().remove(this);
+                                System.out.println("TRANS\n"+ioe.getMessage());
+                                return;
+                            }
+                            max =  Math.max(max, ((byte[])object).length);
                             if(object.equals(-2)) {
-                                for(HashMap.Entry<Integer, Client> client : clients.entrySet()) {
-                                    client.getValue().getOutput().writeObject(-2);
+                                synchronized (this) {
+                                    for(HashMap.Entry<Integer, Client> client : clients.entrySet()) {
+                                        client.getValue().getOutput().writeObject(-2);
+                                    }
+                                    isSharing = false;
                                 }
-                                isSharing = false;
                             }
                             else {
                                 for(HashMap.Entry<Integer, Client> client : clients.entrySet()) {
-                                    client.getValue().getOutput().writeObject(object);
-                                    System.out.println("Client #" + number + " sends client #" + client.getValue().getNumber());
+                                    try {
+                                        client.getValue().getOutput().writeObject(object);
+                                    } catch(Exception e) { }
                                 }
                             }
                         }
                     }
                     else if(type == -3) {
-                        int i = (int) input.readObject();
-                        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! " + i);
-                        server.getClients().get(i).getClients().put(number, this);
-                        System.out.println(server.getClients().get(i).getClients().size());
+                        synchronized (this) {
+                            if(host != null) {
+                                server.getClientsTrans().get(host).clients.remove(number);
+                            }
+                            int i = (int) input.readObject();
+                            host = i;
+                            server.getClients().get(i).getClients().put(number, this);
+                            System.out.println(i);
+                        }
                     }
                     else if(type == -4) {
                         int i = (int) input.readObject();
-                        server.getClients().get(i).getClients().remove(i);
+                        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! " + i + " " + number);
+                        server.getClients().get(i).getClients().remove(number);
                     }
-//                    bitmapReaderWriter = new BitmapReaderWriter(server, number);
-//                    bitmapReaderWriter.readObject(input);
-//                    System.out.println("Received");
-//                    System.out.println("Client #" + number + " sends to " + bitmapReaderWriter.getToWhom() + " video: " + bitmapReaderWriter.getSize());
-//                    bitmapReaderWriter.writeObject();
-
+                    else if(type == -5) {
+                        byte[] trans = new byte[server.getClientsTrans().size()];
+                        int i = 0;
+                        for(Client temp : server.getClientsTrans()){
+                            trans[i] = (byte)temp.number;
+                            i++;
+                        }
+                        output.flush();
+                        output.writeObject(concat(new byte[]{63, 25, 10, 31}, trans));
+                        System.out.println(Arrays.toString(trans));
+                    }
                 } catch (Exception e) {
-                    // e.printStackTrace();
+                  //  e.printStackTrace();
                 }
+
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    private byte[] concat(byte[] a, byte[] b) {
+        byte[] t = new byte[a.length + b.length];
+        System.arraycopy(a, 0, t, 0, a.length);
+        System.arraycopy(b, 0, t, a.length, b.length);
+        return t;
     }
 }

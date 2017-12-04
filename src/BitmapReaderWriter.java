@@ -55,7 +55,7 @@ public class BitmapReaderWriter {
 
     public void readObject(java.io.ObjectInputStream in) throws IOException, ClassNotFoundException {
         object = in.readObject();
-        size = ((byte[])object).length;
+        size = ((byte[]) object).length;
         toWhom = (int) ((byte[]) object)[0];
         object = remove((byte[])object, 0);
     }
